@@ -1,4 +1,23 @@
+const jwt = require('jsonwebtoken');
 const { loginValidation, registerValidation } = require('./validations');
+
+function verifyUser(req, res, next) {
+  const token = req.header('Auth-Token');
+
+  if (!token) {
+    res.staus(401);
+    next({ message: 'Access Denied' });
+  }
+
+  try {
+    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+    req.user = verified;
+    next();
+  } catch (err) {
+    res.status(400);
+    next({ message: 'Invalid Token' });
+  }
+}
 
 function loginValidator(req, res, next) {
   const { error } = loginValidation(req.body);
