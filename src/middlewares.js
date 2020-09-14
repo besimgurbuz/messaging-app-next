@@ -1,3 +1,27 @@
+const { loginValidation, registerValidation } = require('./validations');
+
+function loginValidator(req, res, next) {
+  const { error } = loginValidation(req.body);
+
+  if (error) {
+    res.status(400);
+    const err = new Error(`Request body cannot be validated - ${error.details[0].message}`);
+    next(err);
+  }
+  next();
+}
+
+function registerValidator(req, res, next) {
+  const { error } = registerValidation(req.body);
+
+  if (error) {
+    res.status(400);
+    const err = new Error(`Request body cannot be validated - ${error.details[0].message}`);
+    next(err);
+  }
+  next();
+}
+
 function notFound(req, res, next) {
   res.status(404);
   const error = new Error(`Not found - ${req.originalUrl}`);
@@ -17,5 +41,7 @@ function errorHandler(err, req, res, next) {
 
 module.exports = {
   errorHandler,
-  notFound
+  notFound,
+  loginValidator,
+  registerValidator
 };
