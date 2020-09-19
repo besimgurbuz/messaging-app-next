@@ -30,7 +30,10 @@ route.post('/', loginValidator, async (req, res) => {
     // if password is correct, return an jwt instance
     if (validPassword) {
       // create jwt
-      const token = jwt.sign({ user_id: user._id }, process.env.TOKEN_SECRET);
+      const token = jwt.sign({
+        user_id: user._id,
+        username: user.username
+      }, process.env.TOKEN_SECRET);
       res.header('Auth-Token', token);
 
       // eslint-disable-next-line object-curly-newline
@@ -42,9 +45,8 @@ route.post('/', loginValidator, async (req, res) => {
       message: 'Wrong password'
     });
   } catch (err) {
-    res.status(500);
     return res.json({
-      message: 'Cannot logged in. Try again later.'
+      message: 'Cannot logged in. Try again.'
     });
   }
 });

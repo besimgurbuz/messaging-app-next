@@ -5,7 +5,7 @@ function verifyUser(req, res, next) {
   const token = req.header('Auth-Token');
 
   if (!token) {
-    res.staus(401);
+    res.status(401);
     next({ message: 'Access Denied' });
   }
 
@@ -62,5 +62,6 @@ module.exports = {
   errorHandler,
   notFound,
   loginValidator,
-  registerValidator
+  registerValidator,
+  verifyUser
 };
