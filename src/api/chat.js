@@ -3,6 +3,7 @@ const express = require('express');
 const { verifyUser } = require('../middlewares');
 const ChatModel = require('../model/Chat');
 const UserModel = require('../model/User');
+const logger = require('../utils/logger');
 
 const route = express.Router();
 
@@ -66,11 +67,13 @@ route.post('/', verifyUser, async (req, res) => {
         __v,
         ...props
       } = saveResult.toJSON();
+      logger.info(`New chat created - ${JSON.stringify(props)}`);
       return res.json(props);
     }
     res.status(500);
     return res.json({ message: 'Chat cannot be created' });
   } catch (err) {
+    logger.error(err);
     return res.json(err);
   }
 });

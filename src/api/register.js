@@ -60,6 +60,7 @@ route.post('/', registerValidator, async (req, res) => {
     res.status(500);
     return res.json({ message: `User cannot be saved - ${JSON.stringify(crediatials)}` });
   } catch (err) {
+    logger.error(err);
     return res.json(err);
   }
 });

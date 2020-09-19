@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const { loginValidator } = require('../middlewares');
 const UserModel = require('../model/User');
+const logger = require('../utils/logger');
 
 const route = express.Router();
 
@@ -45,6 +46,7 @@ route.post('/', loginValidator, async (req, res) => {
       message: 'Wrong password'
     });
   } catch (err) {
+    logger.error(err);
     return res.json({
       message: 'Cannot logged in. Try again.'
     });
