@@ -23,6 +23,12 @@
     "url": "https://github.com/besimgurbuz/messaging-app-next/issues"
   },
   "homepage": "https://github.com/besimgurbuz/messaging-app-next#readme",
+  "jest": {
+      "testEnvironment": "node",
+      "coveragePathIgnorePatterns": [
+        "/node_modules/"
+      ]
+    },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -33,12 +39,15 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.5",
     "morgan": "^1.10.0",
+    "socket.io": "^2.3.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {
     "eslint": "^7.9.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
+    "jest": "^26.4.2",
+    "mockingoose": "^2.13.2",
     "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
   }
