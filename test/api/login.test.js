@@ -11,7 +11,6 @@ const test_data = {
   hashPassword: '$2a$10$ouKKtPyrlRpak/fretTvI.5zRU07kZaDZgNMkhWGgUFWNfK.pT2ea'
 };
 
-// POST
 describe('POST /api/v1/login', () => {
   it('should response 200 to correct password and username', async () => {
     mockingoose(UserModel).toReturn(test_data, 'findOne');
@@ -32,36 +31,36 @@ describe('POST /api/v1/login', () => {
     }));
   });
 
-  it('should response 400 to incorrect password', async () => {
+  it('should response 400 to incorrect password', (done) => {
     mockingoose(UserModel).toReturn(test_data, 'findOne');
 
-    const response = await request(app)
+    request(app)
       .post('/api/v1/login')
       .send({
         username: 'username',
         password: 'somewrongpassword'
       })
       .set('Accept', 'application/json')
-      .expect('Content-Type', /json/);
-
-    expect(response.status).toBe(400);
-    expect(JSON.stringify(response.body)).toBe(JSON.stringify({ message: 'Wrong password' }));
+      .expect('Content-Type', /json/)
+      .expect(400, {
+        message: 'Wrong password'
+      }, done);
   });
 
-  it('should response 400 to not found user', async () => {
+  it('should response 400 to not found user', (done) => {
     mockingoose(UserModel).toReturn(null, 'findOne');
 
-    const response = await request(app)
+    request(app)
       .post('/api/v1/login')
       .send({
         username: 'unknownusername',
         password: 'mysecretpassword'
       })
       .set('Accept', 'application/json')
-      .expect('Content-Type', /json/);
-
-    expect(response.status).toBe(400);
-    expect(JSON.stringify(response.body)).toBe(JSON.stringify({ message: 'There is no user with this username - unknownusername' }));
+      .expect('Content-Type', /json/)
+      .expect(400, {
+        message: 'There is no user with this username - unknownusername'
+      }, done);
   });
 
   it('should response 400 from middleware req.body controls: username', async () => {
