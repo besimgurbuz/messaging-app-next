@@ -45,15 +45,15 @@ route.post('/', registerValidator, async (req, res) => {
     const result = await newUser.save();
 
     const {
-      hashPassword,
       _id,
       __v,
+      hashPassword,
       ...crediatials
     } = result.toJSON();
 
     // if new user saved successfully result will be the saved object, if not it will be undefined
     // for more information about save method: https://mongoosejs.com/docs/api/model.html#model_Model-save
-    if (result === newUser) {
+    if (crediatials.username === username) {
       logger.info(`New user registered - ${username}`);
       return res.json(crediatials);
     }
