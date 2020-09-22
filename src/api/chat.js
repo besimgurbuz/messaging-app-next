@@ -73,7 +73,18 @@ route.post('/', verifyUser, async (req, res) => {
       });
     }
 
-    // 4. create chat
+    // 4. check is receiver blocked requester
+    const receiverUser = await UserModel.findOne({ username: receiver });
+    const { blockedList } = receiverUser.toJSON();
+
+    if (blockedList.includes(username)) {
+      res.status(400);
+      return res.json({
+        message: 'Sorry you cannot chat with this user, he/she blocked you..'
+      });
+    }
+
+    // 5. create chat
     const newChat = new ChatModel({
       lastActivity: Date.now(),
       subscribers: [username, receiver],
