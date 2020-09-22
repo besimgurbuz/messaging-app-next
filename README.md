@@ -9,7 +9,7 @@ A messaging App created with Node.js, MongoDB and Socket.io.
 - [Installation and First Run](#installation-and-first-run)
   - [With Docker](#with-docker)
   - [Without Docker](#without-docker)
-- [API Documentation](#api-document)
+- [API Documentation](#api-documentation)
 - [Author](#author)
 
 ## Installation And First Run
