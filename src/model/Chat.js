@@ -6,9 +6,9 @@ const chatSchema = new Schema({
   lastActivity: Date,
   subscribers: [String],
   messages: [{
-    username: { type: String, lowercase: true, trim: true },
+    username: String,
     body: String,
-    date: Date
+    date: String
   }]
 });
 

@@ -13,9 +13,32 @@ route.get('/', verifyUser, async (req, res) => {
   try {
     // 2. get chats which user subscribed
     const chats = await ChatModel.find({ subscribers: username });
+
+    const result = chats.map((chat) => {
+      const { subscribers, ...otherFields } = chat.toJSON();
+      const receiver = subscribers.filter((sub) => sub !== username);
+      return {
+        ...otherFields,
+        receiver
+      };
+    });
     // 3. return found chats
-    return res.json(chats);
+    return res.json(result);
   } catch (err) {
+    return res.json(err);
+  }
+});
+
+// get by id
+route.get('/:id', verifyUser, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const chat = await ChatModel.findById(id);
+
+    return res.json(chat);
+  } catch (err) {
+    logger.error(err);
     return res.json(err);
   }
 });

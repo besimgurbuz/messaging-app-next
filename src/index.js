@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
+const http = require('http');
 
 const app = require('./app');
+const chat = require('./chat');
 const logger = require('./utils/logger');
 
 const port = process.env.PORT || 8080;
@@ -15,6 +17,10 @@ mongoose.connect(conn_url, { useNewUrlParser: true, useUnifiedTopology: true }).
   logger.error(err);
 });
 
-app.listen(port, () => {
+// Init Socket.io
+const server = http.createServer(app);
+chat(server);
+
+server.listen(port, () => {
   logger.info(`Listening: http://localhost:${port}`);
 });
