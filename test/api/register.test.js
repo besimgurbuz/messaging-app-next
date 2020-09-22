@@ -160,6 +160,7 @@ describe('POST /api/v1/register', () => {
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, {
+          blockedList: [],
           username: 'newusername',
           email: 'valid@example.com'
         }, done);

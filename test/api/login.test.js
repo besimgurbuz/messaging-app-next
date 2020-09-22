@@ -26,6 +26,7 @@ describe('POST /api/v1/login', () => {
 
     expect(response.status).toBe(200);
     expect(JSON.stringify(response.body.user)).toBe(JSON.stringify({
+      blockedList: [],
       username: 'username',
       email: 'email@example.com'
     }));
