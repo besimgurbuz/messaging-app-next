@@ -1,10 +1,18 @@
 version: '3.4'
 
 services:
-  messaging-app-next:
-    image: messaging-app-next
-    build: .
+  messaging-app:
+    image: messaging-app
+    build: messaging-app-next
+    environment:
+      NODE_ENV: production
+    env_file: messaging-app-next/.env
+    ports:
+      - '8080:8080'
+  messaging-app-ui:
+    image: messaging-app-ui
+    build: messaging-app-ui
     environment:
       NODE_ENV: production
     ports:
-      - 8080
+      - '4200:80'
