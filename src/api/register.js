@@ -8,7 +8,7 @@ const UserModel = require('../model/User');
 const route = express.Router();
 
 route.post('/', registerValidator, async (req, res) => {
-  // is email or username is already registered?
+  // e-mail or username already registered?
   // we should check this before any query to the DB.
   const { username, email, password } = req.body;
 
@@ -29,7 +29,7 @@ route.post('/', registerValidator, async (req, res) => {
       });
     }
 
-    // Now we sure that username or email are unique
+    // Now we sure that username and email are unique
     // lets save new user
     // first hash password, we don't want to save passwords without hashing for security concerns
     // salt refers to complexity of hash
