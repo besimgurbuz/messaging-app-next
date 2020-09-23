@@ -42,7 +42,6 @@ function initChat(server) {
         } else if (verified && chat && subscribers.includes(verified.username)) {
           logger.info(`Message recived - ${JSON.stringify(msg)}`);
           messages.push(msg);
-          logger.info(JSON.stringify(messages));
 
           // save message
           const result = await ChatModel.findByIdAndUpdate(
@@ -51,7 +50,7 @@ function initChat(server) {
           );
 
           io.to(roomId).emit('message', msg);
-          logger.info(`RESULT ${JSON.stringify(result)}`);
+          logger.info(`User ${verified.username} send message to Room - ${roomId}`);
         }
       } catch (err) {
         logger.error(err);
