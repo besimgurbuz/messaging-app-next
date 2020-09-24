@@ -48,6 +48,9 @@ You should clone both of these repositories into the same directory.
 #### Running
 
 There are same `docker-compose.yml` files both of these repos. You can use any of these `docker-compose.yml` file for running. But first you should move `docker-compose.yml` file into the upper directory which includes both repositories.
+```
+$ mv ./messaging-app-next/docker-compose.yml ./docker-compose.yml
+```
 
 ##### You should see these output when you command `ls`
 
