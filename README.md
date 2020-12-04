@@ -52,7 +52,7 @@ There are same `docker-compose.yml` files both of these repos. You can use any o
 $ mv ./messaging-app-next/docker-compose.yml ./docker-compose.yml
 ```
 
-##### You should see these output when you command `ls`
+##### You should see this output when you command `ls`
 
 ```
 $ ls
