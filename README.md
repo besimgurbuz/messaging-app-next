@@ -272,4 +272,4 @@ Available endpoints in application
 
 ## Author
 
-besimgurbuz - [besimgurbuz.com](http://besimgurbuz.com)
+besimgurbuz - [besimgurbuz.dev](http://besimgurbuz.dev)
